@@ -5,11 +5,11 @@
             <p>Welcome to our digital library! We're dedicated to providing a vast collection of books and resources to our community.</p>
         </div>
     </div>
-  </template>
+</template>
   
-  <script setup>
+<script setup>
   // No script needed for now
-  </script>
+</script>
   
-  <style>
-  </style>
+<style>
+</style>
