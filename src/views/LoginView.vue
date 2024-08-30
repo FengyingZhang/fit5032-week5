@@ -1,13 +1,13 @@
 <template>
     <div class="login-container">
       <h2>Login</h2>
-      <form @submit.prevent="login">
+      <form @submit.prevent="submitLogin">
         <div class="form-group">
           <label for="username">Username:</label>
           <input
             type="text"
             id="username"
-            v-model="username"
+            v-model="formData.username"
             class="form-control"
           />
         </div>
@@ -16,7 +16,7 @@
           <input
             type="password"
             id="password"
-            v-model="password"
+            v-model="formData.password"
             class="form-control"
           />
         </div>
@@ -28,16 +28,25 @@
 
 <script setup>
 import { ref } from 'vue'
+import { login } from '@/auth';
 const formData = ref({
   username: '',
   password: ''
 })
-const isAuthenticated = ref(false);
 const error = ref("");
 
-const login = () => {
-  if (formData.value.username === "user" && formData.value.password === "password") {
-        isAuthenticated.value = true;
+const clearForm = () => {
+  formData.value = {
+    username: '',
+    password: ''
+  }
+}
+
+const submitLogin = () => {
+  if (formData.value.username === "user" && formData.value.password === "1234") {
+        login();
+        error.value = "";
+        clearForm();
     } else {
         error.value = "Invalid credentials.";
     }

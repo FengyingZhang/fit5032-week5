@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import LoginView from '@/views/LoginView.vue'
+import { isAuthenticated } from '@/auth'
 
 const routes = [
   {
@@ -17,7 +18,16 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    component: AboutView
+    component: AboutView,
+    beforeEnter: (to, from, next) => {
+      // Perform logic before entering the About route
+      if (isAuthenticated.value) {
+        next();
+      } else {
+        alert("You need to login first")
+        next('/login');
+      }
+    }
   }
 ]
 
@@ -25,16 +35,5 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
-
-router.beforeEach((to, from, next) => {
-  // Perform logic before every route change
-  if (to.name == 'About') {
-    // For example, redirect to home if trying to access any other route
-    next({ name: 'Login' });
-    alert("You need to login first");
-  } else {
-    next();
-  }
-});
 
 export default router

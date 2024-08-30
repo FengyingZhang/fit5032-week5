@@ -1,4 +1,14 @@
 <script>
+import { isAuthenticated, logout } from '@/auth.js';
+export default {
+  name: 'BHeader',
+  setup() {
+    return {
+      isAuthenticated,
+      logout
+    };
+  }
+};
 </script>
 
 <template>
@@ -13,8 +23,8 @@
           >
         </li>
         <li class="nav-item">
-          <router-link v-if="true" to="/login" class="nav-link" active-class="active">Login</router-link>
-          <button v-else @click="Logout" class="nav-link btn btn-link" style="padding: 0; border: none;">Logout</button>
+          <router-link v-if="!isAuthenticated" to="/login" class="nav-link" active-class="active">Login</router-link>
+          <router-link v-else @click="logout" to="/login" class="nav-link" active-class="active">Logout</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
