@@ -9,6 +9,7 @@
 import{ref} from "vue"
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth"
 import { useRouter } from "vue-router";
+import { login } from '@/auth';
 const email = ref("")
 const password = ref("")
 const router = useRouter()
@@ -18,6 +19,7 @@ const signin = () => {
     .then((data) => {
         console.log("Firebase Sign in Successful!")
         router.push("/")
+        login()
         console.log(auth.currentUser)
     }).catch((error)=>{
         console.log(error.code);
