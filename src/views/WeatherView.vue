@@ -100,6 +100,17 @@ export default {
       } catch (error) {
         console.error("Error fetching weather data:", error);
       }
+    },
+    async searchByCity() {
+      if (!this.city) return;
+      try {
+        const urlsearch = `http://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=${apikey}`;
+        const response = await axios.get(urlsearch);
+        this.weatherData = response.data;
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+      }
+      this.city = "";
     }
   }
 };
