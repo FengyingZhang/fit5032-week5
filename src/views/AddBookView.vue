@@ -28,7 +28,7 @@ export default {
 
         const addBook = async ()  => {
             try {
-                const isbnNumber = number(isbn.value);
+                const isbnNumber = Number(isbn.value);
                 if (isNaN(isbnNumber)) {
                     alert('ISBN must be a valid number');
                     return;
