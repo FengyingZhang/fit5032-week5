@@ -27,6 +27,23 @@ exports.countBooks = onRequest((req, res) => {
     }
   });
 });
+
+exports.capitalizeBooks = onRequest((req, res) => {
+  cors(req, res, async () => {
+    try {
+      const booksCollection = admin.firestore().collection("books");
+      const snapshot = await booksCollection.get();
+      const names = snapshot.docs.map((doc) => {
+        const data = doc.data();
+        return data.name ? data.name.toUpperCase() : "";
+      });
+      res.status(200).send({names});
+    } catch (error) {
+      console.error("Error capitalizing books:", error.message);
+      res.status(500).send("Error capitalizing books");
+    }
+  });
+});
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
 
