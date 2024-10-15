@@ -11,71 +11,69 @@ import WeatherView from '@/views/WeatherView.vue'
 import CountBookAPI from '@/views/CountBookAPI.vue'
 import GetAllBookAPI from '@/views/GetAllBookAPI.vue'
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: HomeView
-  },
-  {
-    path: '/GetBookCount',
-    name: 'GetBookCount',
-    component: GetBookCountView
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: LoginView
-  },
-  {
-    path: '/FireLogin',
-    name: 'FireLogin',
-    component: FirebaseSigninView
-  },
-  {
-    path: '/FireRegister',
-    name: 'FireRegister',
-    component: FirebaseRegisterView
-  },
-  {
-    path: '/addbook',
-    name: 'AddBook',
-    component: AddBookView
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: AboutView,
-    beforeEnter: (to, from, next) => {
-      // Perform logic before entering the About route
-      if (isAuthenticated.value) {
-        next();
-      } else {
-        alert("You need to login first")
-        next('/login');
-      }
-    }
-  },
-  {
-    path: '/WeatherCheck',
-    name: 'WeatherCheck',
-    component: WeatherView
-  },
-  {
-    path: '/CountBookAPI',
-    name: 'CountBookAPI',
-    component: CountBookAPI
-  },
-  {
-    path: '/GetAllBookAPI',
-    name: 'GetAllBookAPI',
-    component: GetAllBookAPI
-  }
-]
-
 const router = createRouter({
-  history: createWebHistory(),
-  routes
+  history: createWebHistory(process.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: HomeView
+    },
+    {
+      path: '/GetBookCount',
+      name: 'GetBookCount',
+      component: GetBookCountView
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: LoginView
+    },
+    {
+      path: '/FireLogin',
+      name: 'FireLogin',
+      component: FirebaseSigninView
+    },
+    {
+      path: '/FireRegister',
+      name: 'FireRegister',
+      component: FirebaseRegisterView
+    },
+    {
+      path: '/addbook',
+      name: 'AddBook',
+      component: AddBookView
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: AboutView,
+      beforeEnter: (to, from, next) => {
+        // Perform logic before entering the About route
+        if (isAuthenticated.value) {
+          next();
+        } else {
+          alert("You need to login first")
+          next('/login');
+        }
+      }
+    },
+    {
+      path: '/WeatherCheck',
+      name: 'WeatherCheck',
+      component: WeatherView
+    },
+    {
+      path: '/CountBookAPI',
+      name: 'CountBookAPI',
+      component: CountBookAPI
+    },
+    {
+      path: '/GetAllBookAPI',
+      name: 'GetAllBookAPI',
+      component: GetAllBookAPI
+    }
+  ]
 })
 
 export default router
